@@ -15,7 +15,7 @@ print("Initilization Complete")
 SOCK.listen()
 pygame.init()
 text = ""
-screen = pygame.display.set_mode((408, 24*playerCount))
+screen = pygame.display.set_mode((408, 30*playerCount))
 clock = pygame.time.Clock()
 font = pygame.font.Font('freesansbold.ttf', 24)
 
@@ -44,9 +44,12 @@ while True:
         else:
             x = ClientList.index(notified_socket)
             data[x] = message.decode()
+
+    data = sorted(s, key=lambda x: int(x[-1]))
     update_message()
     screen.fill((255,255,255))
     for l in data:
+
         text = l[:3] + " " + l[-3:] + "\n"
         t = font.render(text, True, (0,0,0),(255,255,255))
         screen.blit(t,(0,data.index(l)*30))
