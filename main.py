@@ -3,9 +3,8 @@ import sys
 import select
 import pygame
 playerCount = int(input("How many people are playing?"))
-ip = input("What is your ip?")
 SOCK = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-SOCK.bind((ip,12345))
+SOCK.bind(("0.0.0.0",12345))
 print("Starting server")
 ClientList = []
 data = []
@@ -28,7 +27,7 @@ for i in range(playerCount):
     print("Waiting for connection")
     connection, ADDRESS = SOCK.accept()
     ClientList.append(connection)
-    print(ClientList)
+    print(connection)
 for j in ClientList:
     j.sendall("1".encode())
 while True:
